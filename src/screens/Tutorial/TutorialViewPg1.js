@@ -358,59 +358,50 @@ function TutorialViewPg1({ navigation }) {
           입니다.
         </Text>
       </View>
-
       {inputMyValue && selectedDaechu ? (
         <View
           style={{
             position: "absolute",
-            padding: 10,
-            bottom: 50,
-            width: "100%",
+            bottom: -60,
             flexDirection: "row",
             justifyContent: "center",
           }}
         >
           <TouchableOpacity
             style={{
-              width: "90%",
-              height: 55,
-              padding: 15,
+              width: "100%",
+              height: 150,
               backgroundColor: "#2D4B8E",
-              borderRadius: 30,
               alignItems: "center",
-              justifyContent: "center",
             }}
             onPress={() => nextBtn()}
           >
-            <Text style={{ fontSize: 20, fontFamily: "B", color: "white" }}>
-              다음
-            </Text>
+            <View style={{ marginTop: 20 }}>
+              <Text style={{ fontSize: 23, fontFamily: "B", color: "#FFFFFF" }}>
+                다음
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       ) : (
         <View
           style={{
             position: "absolute",
-            padding: 10,
-            bottom: 50,
-            width: "100%",
+            bottom: -60,
             flexDirection: "row",
             justifyContent: "center",
           }}
         >
           <View
             style={{
-              width: "90%",
-              height: 55,
-              padding: 15,
+              width: "100%",
+              height: 150,
               backgroundColor: "#DEDEDE",
-              borderRadius: 30,
               alignItems: "center",
-              justifyContent: "center",
             }}
           >
-            <View>
-              <Text style={{ fontSize: 20, fontFamily: "B" }}>다음</Text>
+            <View style={{ marginTop: 20 }}>
+              <Text style={{ fontSize: 23, fontFamily: "B" }}>다음</Text>
             </View>
           </View>
         </View>

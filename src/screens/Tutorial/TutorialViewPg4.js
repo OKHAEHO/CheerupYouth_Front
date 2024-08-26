@@ -128,7 +128,10 @@ function TutorialViewPg4({ navigation }) {
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <HeaderComponent onPress={backBtn} headerText="전세 계약 튜토리얼" />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ flex: 1, height: 500 }}
+      >
         <View style={{ margin: 25, marginTop: 20, marginBottom: 0 }}>
           <View
             style={{
@@ -201,269 +204,140 @@ function TutorialViewPg4({ navigation }) {
         {[...new Set(dbdata.map((data) => data.title))].map(
           (title, index) =>
             title && (
-              <View key={index}>
-                {title !== "서류 확인 공통사항" ? (
-                  <TouchableOpacity
-                    style={{
-                      backgroundColor: "white",
-                      margin: 25,
-                      marginTop: 15,
-                      marginBottom: title === "등기부등본" ? 0 : 0,
-                      borderRadius: 5,
-                      shadowColor: clickItems.includes(title)
-                        ? "rgba(45, 75, 142,0.3)"
-                        : "rgba(147,147,147,0.7)",
-                      shadowOffset: {
-                        width: 1,
-                        height: 0,
-                      },
-                      shadowOpacity: 5,
-                      shadowRadius: 3,
-                      elevation: 5,
-                    }}
-                    onPress={() => toggleItem(title)}
-                  >
-                    <View
-                      style={{
-                        margin: 20,
-                        marginBottom: clickItems.includes(title) ? 28 : 20,
-                      }}
-                    >
-                      <View
-                        style={{
-                          height: 25,
-                          flexDirection: "row",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Text style={{ fontFamily: "SB", fontSize: 20 }}>
-                          {title}
-                        </Text>
-                        <Icon
-                          name={
-                            clickItems.includes(title)
-                              ? "expand-less"
-                              : "expand-more"
-                          }
-                          size={30}
-                          color={
-                            clickItems.includes(title)
-                              ? "rgba(45, 75, 142,0.8)"
-                              : "#979797"
-                          }
-                          style={{ bottom: 2.5 }}
-                        />
-                      </View>
-                      {clickItems.includes(title) && (
-                        <View>
-                          <View
-                            style={{
-                              height: 0.9,
-                              backgroundColor: "rgba(238,238,238,1.0)",
-                              marginTop: 20,
-                            }}
-                          ></View>
-                          <View
-                            style={{
-                              marginTop: 20,
-                              marginRight: 20,
-                              marginBottom: -20,
-                            }}
-                          >
-                            {dbdata
-                              .filter((data) => data.title.includes(title))
-                              .map((data, idx) => (
-                                <TouchableOpacity
-                                  key={`${title}-${idx}`}
-                                  onPress={() => {
-                                    setStyleChange((prevState) => {
-                                      if (prevState.includes(data.value)) {
-                                        return prevState.filter(
-                                          (item) => item !== data.value
-                                        );
-                                      } else {
-                                        return [...prevState, data.value];
-                                      }
-                                    });
-                                  }}
-                                  style={{
-                                    flexDirection: "row",
-                                    paddingBottom: 20,
-                                  }}
-                                >
-                                  <Icon
-                                    name={
-                                      styleChange.includes(data.value)
-                                        ? "check-box-outline-blank"
-                                        : "check-box"
-                                    }
-                                    size={18}
-                                    color={
-                                      styleChange.includes(data.value)
-                                        ? "gray"
-                                        : "#2D4B8E"
-                                    }
-                                    style={{ marginTop: 3, marginRight: 5 }}
-                                  />
-                                  <Text
-                                    style={{
-                                      marginTop: 1,
-                                      fontSize: 17,
-                                      fontFamily: "M",
-                                    }}
-                                  >
-                                    {data.value}
-                                  </Text>
-                                </TouchableOpacity>
-                              ))}
-                          </View>
-                        </View>
-                      )}
-                    </View>
-                  </TouchableOpacity>
-                ) : (
+              <View
+                key={index}
+                style={{
+                  backgroundColor: "white",
+                  margin: 25,
+                  marginTop: 20,
+                  marginBottom: title === "등기부등본" ? 60 : 0,
+                  borderRadius: 5,
+                  shadowColor: "rgba(45, 75, 142,0.3)",
+                  shadowOffset: {
+                    width: 1,
+                    height: 0,
+                  },
+                  shadowOpacity: 5,
+                  shadowRadius: 3,
+                  elevation: 5,
+                }}
+              >
+                <View style={{ margin: 20, marginBottom: 28 }}>
+                  <Text style={{ fontFamily: "SB", fontSize: 20 }}>
+                    {title}
+                  </Text>
                   <View
                     style={{
-                      backgroundColor: "white",
-                      margin: 25,
+                      height: 0.9,
+                      backgroundColor: "rgba(238,238,238,1.0)",
                       marginTop: 20,
-                      marginBottom: title === "등기부등본" ? 150 : 0,
-                      borderRadius: 5,
-                      shadowColor: "rgba(45, 75, 142,0.3)",
-                      shadowOffset: {
-                        width: 1,
-                        height: 0,
-                      },
-                      shadowOpacity: 5,
-                      shadowRadius: 3,
-                      elevation: 5,
+                    }}
+                  ></View>
+                  <View
+                    style={{
+                      marginTop: 20,
+                      marginRight: 20,
+                      marginBottom: -20,
                     }}
                   >
-                    <View style={{ margin: 20, marginBottom: 28 }}>
-                      <Text style={{ fontFamily: "SB", fontSize: 20 }}>
-                        {title}
-                      </Text>
-                      <View
-                        style={{
-                          height: 0.9,
-                          backgroundColor: "rgba(238,238,238,1.0)",
-                          marginTop: 20,
-                        }}
-                      ></View>
-                      <View
-                        style={{
-                          marginTop: 20,
-                          marginRight: 20,
-                          marginBottom: -20,
-                        }}
-                      >
-                        {dbdata
-                          .filter((data) => data.title.includes(title))
-                          .map((data, idx) => (
-                            <TouchableOpacity
-                              key={`${title}-${idx}`}
-                              onPress={() => {
-                                setStyleChange((prevState) => {
-                                  if (prevState.includes(data.value)) {
-                                    return prevState.filter(
-                                      (item) => item !== data.value
-                                    );
-                                  } else {
-                                    return [...prevState, data.value];
-                                  }
-                                });
-                              }}
-                              style={{
-                                flexDirection: "row",
-                                paddingBottom: 20,
-                                marginRight: 20,
-                                marginTop: 0,
-                                marginLeft: 0,
-                                marginBottom: 0,
-                              }}
-                            >
-                              <Icon
-                                name={
-                                  styleChange.includes(data.value)
-                                    ? "check-box-outline-blank"
-                                    : "check-box"
-                                }
-                                size={18}
-                                color={
-                                  styleChange.includes(data.value)
-                                    ? "gray"
-                                    : "#2D4B8E"
-                                }
-                                style={{ marginTop: 3, marginRight: 5 }}
-                              />
-                              <Text
-                                style={{
-                                  marginTop: 1,
-                                  fontSize: 17,
-                                  fontFamily: "M",
-                                }}
-                              >
-                                {data.value}
-                              </Text>
-                            </TouchableOpacity>
-                          ))}
-                      </View>
-                    </View>
+                    {dbdata
+                      .filter((data) => data.title.includes(title))
+                      .map((data, idx) => (
+                        <TouchableOpacity
+                          key={`${title}-${idx}`}
+                          onPress={() => {
+                            setStyleChange((prevState) => {
+                              if (prevState.includes(data.value)) {
+                                return prevState.filter(
+                                  (item) => item !== data.value
+                                );
+                              } else {
+                                return [...prevState, data.value];
+                              }
+                            });
+                          }}
+                          style={{
+                            flexDirection: "row",
+                            paddingBottom: 20,
+                            marginRight: 20,
+                            marginTop: 0,
+                            marginLeft: 0,
+                            marginBottom: 0,
+                          }}
+                        >
+                          <Icon
+                            name={
+                              styleChange.includes(data.value)
+                                ? "check-box-outline-blank"
+                                : "check-box"
+                            }
+                            size={18}
+                            color={
+                              styleChange.includes(data.value)
+                                ? "gray"
+                                : "#2D4B8E"
+                            }
+                            style={{ marginTop: 3, marginRight: 5 }}
+                          />
+                          <Text
+                            style={{
+                              marginTop: 1,
+                              fontSize: 17,
+                              fontFamily: "M",
+                            }}
+                          >
+                            {data.value}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
                   </View>
-                )}
+                </View>
               </View>
             )
         )}
         <View
           style={{
-            padding: 10,
-            marginTop: clickItems.includes("등기부등본") ? 30 : 90,
-            marginBottom: 50,
-            width: "100%",
+            // position: "absolute",
+            // bottom: -60,
             flexDirection: "row",
             justifyContent: "center",
           }}
-          onPress={backBtn}
         >
           <TouchableOpacity
             style={{
-              width: "42%",
-              marginRight: 14,
-              height: 55,
-              padding: 15,
+              width: "50%",
+              height: 80,
               backgroundColor: "#DEDEDE",
-              borderRadius: 30,
               alignItems: "center",
-              justifyContent: "center",
             }}
             onPress={beforeBtn}
           >
-            <Text
-              style={{
-                color: "rgba(112,112,112,1.0)",
-                fontSize: 20,
-                fontFamily: "B",
-              }}
-            >
-              이전
-            </Text>
+            <View style={{ marginTop: 20 }}>
+              <Text
+                style={{
+                  color: "rgba(112,112,112,1.0)",
+                  fontSize: 23,
+                  fontFamily: "B",
+                }}
+              >
+                이전
+              </Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              width: "42%",
-              height: 55,
-              marginLeft: 14,
-              padding: 15,
+              width: "50%",
+              height: 80,
               backgroundColor: "#2D4B8E",
-              borderRadius: 30,
               alignItems: "center",
-              justifyContent: "center",
             }}
             onPress={nextBtn}
           >
-            <Text style={{ fontSize: 20, fontFamily: "B", color: "white" }}>
-              다음
-            </Text>
+            <View style={{ marginTop: 20 }}>
+              <Text style={{ fontSize: 23, fontFamily: "B", color: "white" }}>
+                다음
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       </ScrollView>

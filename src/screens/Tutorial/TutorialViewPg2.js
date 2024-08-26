@@ -202,6 +202,7 @@ function TutorialViewPg2({ navigation }) {
         contentContainerStyle={{
           flexGrow: 1,
         }}
+        style={{ flex: 1, height: 10 }}
       >
         <View style={{ margin: 25, marginTop: 20, marginBottom: 0 }}>
           <View
@@ -598,7 +599,7 @@ function TutorialViewPg2({ navigation }) {
             style={{
               alignItems: "center",
               // marginTop: 30,
-              marginBottom: 150,
+              marginBottom: 50,
               padding: 10,
             }}
           >
@@ -644,104 +645,97 @@ function TutorialViewPg2({ navigation }) {
         {tltp && allFieldsFilled ? (
           <View
             style={{
-              position: "absolute",
-              padding: 10,
-
-              bottom: 50,
-              width: "100%",
+              // position: "absolute",
+              // bottom: -60,
               flexDirection: "row",
               justifyContent: "center",
             }}
           >
             <TouchableOpacity
               style={{
-                width: "42%",
-                marginRight: 14,
-                height: 50,
-                padding: 15,
+                width: "50%",
+                height: 80,
                 backgroundColor: "#DEDEDE",
-                borderRadius: 30,
                 alignItems: "center",
-                justifyContent: "center",
               }}
               onPress={() => beforeBtn()}
             >
-              <Text
-                style={{
-                  color: "rgba(112,112,112,1.0)",
-                  fontSize: 20,
-                  fontFamily: "B",
-                }}
-              >
-                이전
-              </Text>
+              <View style={{ marginTop: 20 }}>
+                <Text
+                  style={{
+                    color: "rgba(112,112,112,1.0)",
+                    fontSize: 23,
+                    fontFamily: "B",
+                  }}
+                >
+                  이전
+                </Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
-                width: "42%",
-                height: 50,
-                marginLeft: 14,
-                padding: 15,
+                width: "50%",
+                height: 80,
                 backgroundColor: "#2D4B8E",
-                borderRadius: 30,
                 alignItems: "center",
-                justifyContent: "center",
               }}
               onPress={() => nextBtn()}
             >
-              <Text style={{ fontSize: 20, fontFamily: "B", color: "white" }}>
-                다음
-              </Text>
+              <View style={{ marginTop: 20 }}>
+                <Text style={{ fontSize: 23, fontFamily: "B", color: "white" }}>
+                  다음
+                </Text>
+              </View>
             </TouchableOpacity>
           </View>
         ) : (
           <View
             style={{
-              position: "absolute",
-              padding: 10,
-              bottom: 50,
-              width: "100%",
+              // position: "absolute",
+              // bottom: -60,
               flexDirection: "row",
               justifyContent: "center",
             }}
           >
             <TouchableOpacity
               style={{
-                width: "42%",
-                marginRight: 14,
-                height: 55,
-                padding: 15,
+                width: "50%",
+                height: 80,
                 backgroundColor: "#DEDEDE",
-                borderRadius: 30,
                 alignItems: "center",
-                justifyContent: "center",
               }}
               onPress={beforeBtn}
             >
-              <Text
-                style={{
-                  color: "rgba(112,112,112,1.0)",
-                  fontSize: 20,
-                  fontFamily: "B",
-                }}
-              >
-                이전
-              </Text>
+              <View style={{ marginTop: 20 }}>
+                <Text
+                  style={{
+                    color: "rgba(112,112,112,1.0)",
+                    fontSize: 23,
+                    fontFamily: "B",
+                  }}
+                >
+                  이전
+                </Text>
+              </View>
             </TouchableOpacity>
             <View
               style={{
-                width: "42%",
-                height: 55,
-                marginLeft: 14,
-                padding: 15,
+                width: "50%",
+                height: 150,
                 backgroundColor: "#DEDEDE",
-                borderRadius: 30,
                 alignItems: "center",
-                justifyContent: "center",
               }}
             >
-              <View>
-                <Text style={{ fontSize: 20, fontFamily: "B" }}>다음</Text>
+              <View style={{ marginTop: 20 }}>
+                <Text
+                  style={{
+                    color: "rgba(112,112,112,1.0)",
+                    fontSize: 23,
+                    fontFamily: "B",
+                  }}
+                >
+                  다음
+                </Text>
               </View>
             </View>
           </View>

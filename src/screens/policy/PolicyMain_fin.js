@@ -61,6 +61,7 @@ const PolicyMain_fin = ({ navigation }) => {
         `${SERVER_URL}/policy/match?email=${email}`
       );
       console.log(response.data, "가능여부");
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error("정책 신청 가능 여부 확인 실패:", error);
@@ -129,7 +130,13 @@ const PolicyMain_fin = ({ navigation }) => {
       >
         {filteredPolicy.map((policy) => (
           <View key={policy.key}>
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                marginHorizontal: 15,
+              }}
+            >
               <TouchableOpacity
                 style={{
                   flexDirection: "row",
@@ -144,7 +151,7 @@ const PolicyMain_fin = ({ navigation }) => {
               >
                 <Image
                   source={{ uri: policy.img }}
-                  style={{ width: "30%", height: 100, borderRadius: 10 }}
+                  style={{ width: "40%", height: 130, borderRadius: 10 }}
                 />
                 <View style={{ marginLeft: 10 }}>
                   <P.title>{policy.title}</P.title>

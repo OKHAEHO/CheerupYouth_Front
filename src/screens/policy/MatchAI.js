@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Button, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from "react-native";
+import {
+  View,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import { Text } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -137,12 +144,16 @@ const MatchAI = ({ policyKey, setIsSupportedOpen }) => {
           },
           { role: "user", content: userChatText }, // 사용자 조건
           { role: "user", content: policyChatText }, // 정책 조건
-            {
-              role: "user",
-              content:
-                "답변 형식은 각 조건에 순서대로 번호를 달고 설명을 해줘, 조건마다 간격을 두어 알아보기 쉽도록 해줘",
-            },
-            { role: "user", content: "마지막 결과로 가능 / 불가능을 알려줘 최종 가능하면 check 이모티콘, 불일치하면 X 이모티콘" },
+          {
+            role: "user",
+            content:
+              "답변 형식은 각 조건에 순서대로 번호를 달고 설명을 해줘, 조건마다 간격을 두어 알아보기 쉽도록 해줘",
+          },
+          {
+            role: "user",
+            content:
+              "마지막 결과로 가능 / 불가능을 알려줘 최종 가능하면 check 이모티콘, 불일치하면 X 이모티콘",
+          },
         ],
         temperature: 0.7,
         top_p: 1.0,
@@ -179,7 +190,12 @@ const MatchAI = ({ policyKey, setIsSupportedOpen }) => {
       <View style={styles.modalTop}>
         <View style={styles.modalTopContainer}>
           <Text style={styles.modalTitle}>AI 정책 매칭</Text>
-          <Icon name="reload1" size={18} color="#2E4B8F" onPress={fetchMemberInfo} />
+          <Icon
+            name="reload1"
+            size={18}
+            color="#2E4B8F"
+            onPress={fetchMemberInfo}
+          />
         </View>
         <TouchableOpacity
           style={styles.closeButton}
@@ -197,14 +213,13 @@ const MatchAI = ({ policyKey, setIsSupportedOpen }) => {
 
       <View>
         {loading ? (
-          <ActivityIndicator 
-          size="large" 
-          color="#2e4b8f" 
-          style={{ padding: 20 }} 
-        />
-        
+          <ActivityIndicator
+            size="large"
+            color="#2e4b8f"
+            style={{ padding: 20 }}
+          />
         ) : (
-          <Text style={{ paddingTop: 20, paddingBottom: 20 }} >{response}</Text>
+          <Text style={{ paddingTop: 20, paddingBottom: 20 }}>{response}</Text>
         )}
         {/* <Button title="매칭하기" onPress={fetchMemberInfo} /> */}
         {/* {error && <Text style={{color: 'red'}}>{error}</Text>} */}
@@ -227,8 +242,8 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: "space-between",
   },
-  modalTopContainer : {
-    flexDirection: 'row', // 가로 배치
+  modalTopContainer: {
+    flexDirection: "row", // 가로 배치
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 10,

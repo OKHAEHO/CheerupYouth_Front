@@ -12,6 +12,7 @@ function TutorialViewPg3({ navigation }) {
   const [dbdata, setDbData] = useState([]);
 
   const { user } = useContext(UserContext);
+
   const [styleChange, setStyleChange] = useState([]);
   const [fontLoaded, setFontLoaded] = useState(false);
   const dbControl = (pgname) => {
@@ -127,7 +128,7 @@ function TutorialViewPg3({ navigation }) {
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <HeaderComponent onPress={backBtn} headerText="전세 계약 튜토리얼" />
 
-      <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{ height: 10 }}>
         <View style={{ margin: 25, marginTop: 20, marginBottom: 0 }}>
           <View
             style={{
@@ -218,7 +219,7 @@ function TutorialViewPg3({ navigation }) {
                   backgroundColor: "white",
                   margin: 25,
                   marginTop: 20,
-                  marginBottom: title === "집 주변 Check List" ? 150 : -5,
+                  marginBottom: title === "집 주변 Check List" ? 60 : 0,
                   borderRadius: 5,
                   shadowColor: "rgba(45, 75, 142,0.3)",
                   shadowOffset: {
@@ -326,53 +327,47 @@ function TutorialViewPg3({ navigation }) {
         )}
         <View
           style={{
-            position: "absolute",
-            padding: 10,
-            bottom: 50,
-            width: "100%",
+            // position: "absolute",
+            // bottom: -60,
             flexDirection: "row",
             justifyContent: "center",
           }}
         >
           <TouchableOpacity
             style={{
-              width: "42%",
-              marginRight: 14,
-              height: 55,
-              padding: 15,
+              width: "50%",
+              height: 80,
               backgroundColor: "#DEDEDE",
-              borderRadius: 30,
               alignItems: "center",
-              justifyContent: "center",
             }}
             onPress={beforeBtn}
           >
-            <Text
-              style={{
-                color: "rgba(112,112,112,1.0)",
-                fontSize: 20,
-                fontFamily: "B",
-              }}
-            >
-              이전
-            </Text>
+            <View style={{ marginTop: 20 }}>
+              <Text
+                style={{
+                  color: "rgba(112,112,112,1.0)",
+                  fontSize: 23,
+                  fontFamily: "B",
+                }}
+              >
+                이전
+              </Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              width: "42%",
-              height: 55,
-              marginLeft: 14,
-              padding: 15,
+              width: "50%",
+              height: 80,
               backgroundColor: "#2D4B8E",
-              borderRadius: 30,
               alignItems: "center",
-              justifyContent: "center",
             }}
             onPress={nextBtn}
           >
-            <Text style={{ fontSize: 20, fontFamily: "B", color: "white" }}>
-              다음
-            </Text>
+            <View style={{ marginTop: 20 }}>
+              <Text style={{ fontSize: 23, fontFamily: "B", color: "white" }}>
+                다음
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       </ScrollView>

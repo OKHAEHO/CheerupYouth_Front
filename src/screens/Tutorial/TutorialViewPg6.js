@@ -249,55 +249,47 @@ function TutorialViewPg6({ navigation }) {
         <View
           style={{
             // position: "absolute",
-            padding: 10,
-            // bottom: 50,
-            marginTop: 30,
-            marginBottom: 50,
-            width: "100%",
+            // bottom: -60,
+            marginTop: 60,
             flexDirection: "row",
             justifyContent: "center",
           }}
-          onPress={backBtn}
         >
           <TouchableOpacity
             style={{
-              width: "43%",
-              marginRight: 14,
-              height: 55,
-              padding: 15,
+              width: "50%",
+              height: 80,
               backgroundColor: "#DEDEDE",
-              borderRadius: 30,
               alignItems: "center",
-              justifyContent: "center",
             }}
             onPress={beforeBtn}
           >
-            <Text
-              style={{
-                color: "rgba(112,112,112,1.0)",
-                fontSize: 20,
-                fontFamily: "B",
-              }}
-            >
-              이전
-            </Text>
+            <View style={{ marginTop: 20 }}>
+              <Text
+                style={{
+                  color: "rgba(112,112,112,1.0)",
+                  fontSize: 23,
+                  fontFamily: "B",
+                }}
+              >
+                이전
+              </Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              width: "43%",
-              height: 55,
-              marginLeft: 14,
-              padding: 15,
+              width: "50%",
+              height: 80,
               backgroundColor: "#2D4B8E",
-              borderRadius: 30,
               alignItems: "center",
-              justifyContent: "center",
             }}
             onPress={nextBtn}
           >
-            <Text style={{ fontSize: 20, fontFamily: "B", color: "white" }}>
-              완료
-            </Text>
+            <View style={{ marginTop: 20 }}>
+              <Text style={{ fontSize: 23, fontFamily: "B", color: "white" }}>
+                다음
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       </ScrollView>

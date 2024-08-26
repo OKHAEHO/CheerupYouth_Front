@@ -5,20 +5,19 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Main from "../screens/Main";
 import Community from "../screens/Community";
 import MyPage from "../screens/MyPage";
-
 import { useFocusEffect } from "@react-navigation/native";
 import { UserContext } from "../components/UserProvider";
 
 const Tab = createBottomTabNavigator();
 
 const BottomBar = ({ navigation }) => {
-  const { userDataP, setUserDataP } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   useFocusEffect(
     useCallback(() => {
       return () => {
         // 화면이 포커스를 잃을 때 실행할 작업
       };
-    }, [userDataP]) // userDataP가 변경될 때마다 콜백 함수를 다시 생성
+    }, [user]) // userDataP가 변경될 때마다 콜백 함수를 다시 생성
   );
   return (
     <Tab.Navigator

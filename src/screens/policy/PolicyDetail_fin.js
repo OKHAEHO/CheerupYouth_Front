@@ -47,7 +47,8 @@ const PolicyDetail_fin = ({ route, navigation }) => {
       ref.current.measureLayout(
         scrollViewRef.current,
         (x, y) => {
-          scrollViewRef.current?.scrollTo({ y: y - 0, animated: true });
+          const offset = 45; // 여백을 위해 y값을 약간 줄입니다.
+          scrollViewRef.current?.scrollTo({ y: y - offset, animated: true });
         },
         () => {
           console.error("Failed to measure layout.");
@@ -61,9 +62,6 @@ const PolicyDetail_fin = ({ route, navigation }) => {
     { title: "지원대상", ref: supportedRef },
     { title: "제외대상", ref: excludedRef },
     { title: "지원내용", ref: contentRef },
-    { title: "지원기간", ref: supportedPeriodRef },
-    { title: "신청기간", ref: applicationPeriodRef },
-    { title: "신청방법", ref: wayRef },
   ];
 
   return (
@@ -126,52 +124,110 @@ const PolicyDetail_fin = ({ route, navigation }) => {
         </View>
       </View>
 
-      <View
-        style={{ flexDirection: "row", marginTop: 10, paddingHorizontal: 15 }}
-      >
-        <ScrollView
-          horizontal
-          contentContainerStyle={{ alignItems: "center" }}
-          showsHorizontalScrollIndicator={false}
-        >
-          {btnSection.map((item) => (
-            <TouchableOpacity
-              onPress={() => scrollToSection(item.ref)}
-              key={item.title}
-              style={{ marginVertical: 10, marginHorizontal: 15 }}
-            >
-              <Text style={{ fontFamily: "SB", fontSize: 15 }}>
-                {item.title}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
-
-      {policy.img && (
-        <View
-          style={{
-            marginTop: 10,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "white",
-          }}
-        >
-          <Image
-            source={{ uri: policy.img }}
-            style={{ width: "100%", height: 250, resizeMode: "contain" }}
-            onError={() => console.log("Failed to load image")}
-          />
-        </View>
-      )}
       <ScrollView
         ref={scrollViewRef}
         showsVerticalScrollIndicator={false}
         style={{ marginBottom: 20 }}
+        stickyHeaderIndices={[1]} // Make the horizontal scroll section sticky
       >
+        {/* 이미지 */}
+        {policy.img && (
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "white",
+            }}
+          >
+            <Image
+              source={{ uri: policy.img }}
+              style={{ width: "100%", height: 250 }}
+              onError={() => console.log("Failed to load image")}
+            />
+          </View>
+        )}
+
+        {/* 좌우스크롤 */}
+        <View
+          style={{
+            flexDirection: "row",
+            backgroundColor: "white", // Ensure it appears above the content
+            marginTop: 4,
+            marginHorizontal: 10,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            showsHorizontalScrollIndicator={false}
+          >
+            {btnSection.map((item) => (
+              <TouchableOpacity
+                onPress={() => scrollToSection(item.ref)}
+                key={item.title}
+                style={{ marginVertical: 10, marginHorizontal: 20 }}
+              >
+                <Text style={{ fontFamily: "SB", fontSize: 18 }}>
+                  {item.title}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <View
+            style={{
+              marginTop: 4,
+              height: 1,
+              backgroundColor: "rgba(237,237,237,1.0)",
+            }}
+          />
+        </View>
+
+        {/* 아래스크롤 */}
+
         <View style={{ marginHorizontal: 15, marginTop: 20, width: "70%" }}>
           <Text style={{ fontFamily: "SB", fontSize: 18 }}>{policy.title}</Text>
         </View>
+        <View style={{ marginHorizontal: 15 }}>
+          {policy.content?.Application_period && (
+            <View
+              style={{ marginTop: 10 }}
+              ref={applicationPeriodRef}
+              supportedPeriodRef
+            >
+              <Text style={{ fontFamily: "M", fontSize: 17, color: "#2e4b8f" }}>
+                신청기간
+              </Text>
+              <Text style={{ fontFamily: "R", fontSize: 17, marginTop: 4 }}>
+                {policy.content?.Application_period}
+              </Text>
+            </View>
+          )}
+
+          {policy.content?.supported_period && (
+            <View style={{ marginTop: 10 }} ref={supportedPeriodRef}>
+              <Text style={{ fontFamily: "M", fontSize: 17, color: "#2e4b8f" }}>
+                지원기간
+              </Text>
+              <Text style={{ fontFamily: "R", fontSize: 17, marginTop: 4 }}>
+                {policy.content?.supported_period}
+              </Text>
+            </View>
+          )}
+          {policy.content?.way && (
+            <View style={{ marginTop: 10 }} ref={wayRef}>
+              <Text style={{ fontFamily: "M", fontSize: 17, color: "#2e4b8f" }}>
+                신청방법
+              </Text>
+              <Text style={{ fontFamily: "R", fontSize: 17, marginTop: 4 }}>
+                {policy.content?.way}
+              </Text>
+            </View>
+          )}
+        </View>
+
         <View
           style={{
             marginTop: 15,
@@ -281,57 +337,6 @@ const PolicyDetail_fin = ({ route, navigation }) => {
             backgroundColor: "rgba(237,237,237,1.0)",
           }}
         />
-        {policy.content?.supported_period && (
-          <P.contentBox ref={supportedPeriodRef}>
-            <P.contentBoxTitle>지원기간</P.contentBoxTitle>
-            <P.contentBoxContent>
-              {policy.content?.supported_period}
-            </P.contentBoxContent>
-            <View
-              style={{
-                marginTop: 15,
-                marginRight: 10,
-                marginLeft: 10,
-                height: 1,
-                backgroundColor: "rgba(237,237,237,1.0)",
-              }}
-            />
-          </P.contentBox>
-        )}
-
-        {policy.content?.Application_period && (
-          <P.contentBox ref={applicationPeriodRef}>
-            <P.contentBoxTitle>신청기간</P.contentBoxTitle>
-            <P.contentBoxContent>
-              {policy.content?.Application_period}
-            </P.contentBoxContent>
-            <View
-              style={{
-                marginTop: 15,
-                marginRight: 10,
-                marginLeft: 10,
-                height: 1,
-                backgroundColor: "rgba(237,237,237,1.0)",
-              }}
-            />
-          </P.contentBox>
-        )}
-
-        {policy.content?.way && (
-          <P.contentBox ref={wayRef}>
-            <P.contentBoxTitle>신청방법</P.contentBoxTitle>
-            <P.contentBoxContent>{policy.content?.way}</P.contentBoxContent>
-            <View
-              style={{
-                marginTop: 15,
-                marginRight: 10,
-                marginLeft: 10,
-                height: 1,
-                backgroundColor: "rgba(237,237,237,1.0)",
-              }}
-            />
-          </P.contentBox>
-        )}
 
         {policy.content?.submission_papers && (
           <P.contentBox>
@@ -357,8 +362,10 @@ const PolicyDetail_fin = ({ route, navigation }) => {
             onPressOut={() => setIsSupportedOpen(false)}
           >
             <View style={styles.modalContainer}>
-              <MatchAI policyKey={key} setIsSupportedOpen={setIsSupportedOpen} />
-              
+              <MatchAI
+                policyKey={key}
+                setIsSupportedOpen={setIsSupportedOpen}
+              />
             </View>
           </TouchableOpacity>
         </Modal>

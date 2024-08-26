@@ -20,15 +20,16 @@ const PolicyTop = ({ navigation, allPolicy, setFilteredPolicy }) => {
   }, [text, allPolicy]);
 
   return (
-    <View style={{ margin: 20, marginBottom: 5, marginTop: 10 }}>
+    <View style={{ margin: 15, marginBottom: 5, marginTop: 10 }}>
       <View style={{ flexDirection: "row" }}>
         <TextInput
           style={{
             backgroundColor: "#F7F7F7",
             width: "90%",
-            padding: 15,
+            padding: 20,
             marginVertical: 5,
-            borderRadius: 5,
+            borderRadius: 10,
+            fontSize: 17,
           }}
           placeholder="검색어를 입력해주세요."
           value={text}

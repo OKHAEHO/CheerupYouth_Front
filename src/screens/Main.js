@@ -99,10 +99,10 @@ const Main = ({ navigation }) => {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
           }}
         >
-          <Image
+          {/* <Image
             style={{
               width: 60,
               height: 40,
@@ -110,9 +110,9 @@ const Main = ({ navigation }) => {
               marginHorizontal: 15,
             }}
             source={require("../../assets/images/logoword.png")}
-          />
+          /> */}
           <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity onPress={() => handleMyPage()}>
+            {/* <TouchableOpacity onPress={() => handleMyPage()}>
               <Image
                 style={{
                   width: 25,
@@ -122,7 +122,7 @@ const Main = ({ navigation }) => {
                 }}
                 source={require("../../assets/images/icon-03.png")}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <Image
               style={{
@@ -138,26 +138,26 @@ const Main = ({ navigation }) => {
         <View style={{ margin: 15 }}>
           <Text
             style={{
-              marginBottom: 5,
-              fontSize: 20,
+              marginBottom: 1,
+              fontSize: 24,
               fontFamily: "B",
               color: "#2E4B8F",
             }}
           >
             안녕하세요. {user ? user.name : "묘사"}님
           </Text>
-          <Text style={{ fontSize: 20, fontFamily: "B", color: "#2E4B8F" }}>
+          <Text style={{ fontSize: 20, fontFamily: "B", color: "#000000" }}>
             청년독립만세에 오신 걸 환영합니다.
           </Text>
         </View>
       </View>
-      
+
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ margin: 20 }}>
+        <View style={{ margin: 20, marginBottom: 6 }}>
           <Text style={{ fontSize: 20, fontFamily: "B", color: "#2E4B8F" }}>
             {user ? user.name : "묘사"} 님의 맞춤 정책 추천
           </Text>
-          <Text style={{ marginTop: 5, color: "gray", fontFamily: "SB" }}>
+          <Text style={{ marginTop: 5, color: "gray", fontFamily: "R" }}>
             나의 정보를 입력하시면 더욱 자세한 맞춤 정보를 확인할 수 있어요.
           </Text>
           {/* <TouchableOpacity onPress={() => navigation.navigate('pracAI')}><Text>openAI 연습</Text></TouchableOpacity> */}
@@ -222,7 +222,7 @@ const Main = ({ navigation }) => {
         <View style={{ margin: 20 }}>
           <Text
             style={{
-              marginBottom: 5,
+              marginBottom: 1,
               fontFamily: "B",
               fontSize: 18,
               color: "#2E4B8F",
