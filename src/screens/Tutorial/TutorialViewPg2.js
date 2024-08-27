@@ -704,7 +704,7 @@ function TutorialViewPg2({ navigation }) {
                 backgroundColor: "#DEDEDE",
                 alignItems: "center",
               }}
-              onPress={beforeBtn}
+              onPress={() => beforeBtn()}
             >
               <View style={{ marginTop: 20 }}>
                 <Text
@@ -721,7 +721,7 @@ function TutorialViewPg2({ navigation }) {
             <View
               style={{
                 width: "50%",
-                height: 150,
+                height: 80,
                 backgroundColor: "#DEDEDE",
                 alignItems: "center",
               }}
