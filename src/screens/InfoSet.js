@@ -11,11 +11,9 @@ import {
 } from "react-native";
 import DatePicker from "@react-native-community/datetimepicker";
 import * as S from "../../style/InfoDetailStyle";
-
 import axios from "axios";
 import { SERVER_URL } from "../components/ServerAddress";
 import { UserContext } from "../components/UserProvider";
-
 import HeaderComponent from "../components/HeaderComponent";
 
 const InfoSet = ({ navigation, route }) => {

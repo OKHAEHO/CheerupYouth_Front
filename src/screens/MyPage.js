@@ -16,7 +16,7 @@ const Main = ({ navigation }) => {
 
   const handleLogout = () => {
     logout();
-    navigation.navigate("BottomBar");
+    navigation.navigate("LoginScreen");
   };
 
   // const LogoutBtn = async () => {

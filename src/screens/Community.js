@@ -1,10 +1,5 @@
 import React, { useContext, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { UserContext } from "../components/UserProvider";
 import Map from "../components/Map";
 
@@ -13,19 +8,11 @@ const Community = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#EFF0F5" }}>
-      <View style={{ flex: 1, marginTop: 130, overflow: "hidden" }}>
-        <Map />
-      </View>
-      
-      {/* 상단 부분을 가리는 레이어1 */}
       <View
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "21%", // 높이를 원하는 만큼 조정
           backgroundColor: "white",
+          width: "100%",
+          height: "25%",
           padding: 5,
           borderRadius: 10,
           shadowColor: "rgba(180,180,180,0.4)",
@@ -41,20 +28,20 @@ const Community = ({ navigation }) => {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
           }}
         >
-          <Image
+          {/* <Image
             style={{
               width: 60,
               height: 40,
               marginTop: 60,
               marginHorizontal: 15,
             }}
-            source={require("../../assets/images/mainLogo.png")}
-          />
+            source={require("../../assets/images/logoword.png")}
+          /> */}
           <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity onPress={() => handleMyPage()}>
+            {/* <TouchableOpacity onPress={() => handleMyPage()}>
               <Image
                 style={{
                   width: 25,
@@ -64,7 +51,7 @@ const Community = ({ navigation }) => {
                 }}
                 source={require("../../assets/images/icon-03.png")}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <Image
               style={{
@@ -80,19 +67,20 @@ const Community = ({ navigation }) => {
         <View style={{ margin: 15 }}>
           <Text
             style={{
-              marginBottom: 5,
-              fontSize: 20,
-              fontWeight: "bold",
+              marginBottom: 1,
+              fontSize: 24,
+              fontFamily: "B",
               color: "#2E4B8F",
             }}
           >
-            안녕하세요. {user ? user.name : "로그인"}님
+            안녕하세요. {user ? user.name : "묘사"}님
           </Text>
-          <Text style={{ fontSize: 20, fontWeight: "bold", color: "#2E4B8F" }}>
-            최신 매물들을 확인 해보세요!
+          <Text style={{ fontSize: 20, fontFamily: "B", color: "#000000" }}>
+            매물의 실거래가를 알아보세요.
           </Text>
         </View>
       </View>
+      <Map />
     </View>
   );
 };

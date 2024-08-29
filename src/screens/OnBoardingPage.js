@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Image, StatusBar, Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { UserContext } from "../components/UserProvider";
 
 function OnBoardingPage() {
   const navigation = useNavigation();
   const [fadeAnim] = useState(new Animated.Value(0)); // 투명도 초기값 0 (안보임)
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     // 페이드 인 애니메이션
@@ -20,8 +22,12 @@ function OnBoardingPage() {
           duration: 500, // 1초 동안 페이드 아웃
           useNativeDriver: true,
         }).start(() => {
-          // 애니메이션이 끝나면 네비게이션 수행
-          navigation.replace("BottomBar");
+          // user 정보를 통해 네비게이션 수행
+          if (user && user.id) {
+            navigation.replace("BottomBar");
+          } else {
+            navigation.replace("LoginScreen");
+          }
         });
       }, 1000); // 2초 대기
     });
