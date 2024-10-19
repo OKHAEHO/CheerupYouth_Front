@@ -326,26 +326,30 @@ const SignUp = () => {
               />
             </View>
           </View>
-          <View style={{ alignItems: "center", marginTop: 100 }}>
-            <TouchableOpacity
-              style={{
-                width: "90%",
-                height: 55,
-                padding: 15,
-                backgroundColor: "#2D4B8E",
-                borderRadius: 30,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              onPress={handleSignUp}
-            >
-              <Text style={{ fontSize: 18, fontFamily: "B", color: "white" }}>
-                회원가입 완료
-              </Text>
-            </TouchableOpacity>
-          </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            width: "100%",
+            height: 80,
+            backgroundColor: "#2D4B8E",
+            alignItems: "center",
+          }}
+          onPress={handleSignUp}
+        >
+          <View style={{ marginTop: 20 }}>
+            <Text style={{ fontSize: 18, fontFamily: "B", color: "white" }}>
+              회원가입
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

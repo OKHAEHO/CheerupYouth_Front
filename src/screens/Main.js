@@ -18,7 +18,7 @@ const Main = ({ navigation }) => {
   const getPolicy = async () => {
     try {
       const response = await axios.get(`${SERVER_URL}/policy`);
-      console.log("Response data:", response.data);
+      // console.log("Response data:", response.data);
       setMainPolicy(response.data);
 
       return response.data;
@@ -49,34 +49,21 @@ const Main = ({ navigation }) => {
     }, [user]) // user가 변경될 때마다 콜백 함수를 다시 생성
   );
 
-  const handleMyPage = () => {
-    if (user) {
-      navigation.navigate("mypage");
-    } else {
-      navigation.navigate("LoginScreen");
-    }
-  };
-
   const btnData = [
     {
       id: 1,
-      imageSource: require("../../assets/images/icon-25.png"),
-      title: "나만의\n맞춤 정책",
-      url: "policyMain",
-    },
-    {
-      id: 2,
       imageSource: require("../../assets/images/icon-22.png"),
-      title: "전세 계약\n튜토리얼",
+      title: "부동산 계약\n튜토리얼",
       url: "TutorialScreen",
     },
     {
-      id: 3,
+      id: 2,
       imageSource: require("../../assets/images/icon-13.png"),
       title: "부동산\n용어 리스트",
       url: "LawWordList",
     },
   ];
+
   return (
     <View style={{ flex: 1, backgroundColor: "#EFF0F5" }}>
       <View
@@ -152,97 +139,117 @@ const Main = ({ navigation }) => {
         </View>
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <View showsVerticalScrollIndicator={false}>
         <View style={{ margin: 20, marginBottom: 6 }}>
           <Text style={{ fontSize: 20, fontFamily: "B", color: "#2E4B8F" }}>
             {user ? user.name : "묘사"} 님의 맞춤 정책 추천
           </Text>
-          <Text style={{ marginTop: 5, color: "gray", fontFamily: "R" }}>
-            나의 정보를 입력하시면 더욱 자세한 맞춤 정보를 확인할 수 있어요.
+          <Text style={{ marginTop: 5, color: "#4F5150", fontFamily: "R" }}>
+            상세 정보를 입력하시면 더욱 자세한 맞춤 정보를 확인할 수 있어요.
           </Text>
-          {/* <TouchableOpacity onPress={() => navigation.navigate('pracAI')}><Text>openAI 연습</Text></TouchableOpacity> */}
         </View>
+
         <View
           style={{ flexDirection: "row", marginTop: 10, paddingHorizontal: 5 }}
         >
           <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ alignItems: "center" }}
+          // horizontal
+          // showsHorizontalScrollIndicator={false}
+          // contentContainerStyle={{ alignItems: "center" }}
           >
-            {mainPolicy.slice(0, 4).map((item) => (
-              <TouchableOpacity
-                key={item.key}
-                onPress={() => {
-                  navigation.navigate("policyMain", { key: item.key });
-                }}
-                style={{ height: 180, width: 120, marginLeft: 15 }}
-              >
-                <Image
-                  source={{ uri: item.img }}
-                  style={{ width: 120, height: 120, borderRadius: 10 }}
-                />
-                <View style={{ maxWidth: 120 }}>
-                  <View>
-                    <Text style={{ marginTop: 10, fontFamily: "SB" }}>
+            {mainPolicy.slice(0, 2).map((item) => (
+              <View key={item.key} style={{ alignItems: "center" }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("policyMain", { key: item.key });
+                  }}
+                  style={{
+                    backgroundColor: "white",
+                    height: 120,
+                    width: "90%",
+                    borderRadius: 10,
+                    flexDirection: "row",
+                    marginBottom: 10,
+                  }}
+                >
+                  <Image
+                    source={{ uri: item.img }}
+                    style={{
+                      width: 100,
+                      height: 120,
+                      borderRadius: 10,
+                    }}
+                  />
+                  <View style={{ margin: 10, width: "64%" }}>
+                    <Text style={{ fontFamily: "SB", fontSize: 15 }}>
                       {item.title}
                     </Text>
+                    <View
+                      style={{
+                        marginTop: 8,
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Text style={{ color: "#71777C" }}>{item.sub_title}</Text>
+                    </View>
                   </View>
-                </View>
-              </TouchableOpacity>
+                </TouchableOpacity>
+              </View>
             ))}
             <View
               style={{
-                marginHorizontal: 15,
-                paddingRight: 5,
-                marginBottom: 25,
+                margin: 15,
+                marginBottom: 0,
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
               <TouchableOpacity
                 onPress={() => navigation.navigate("policyMain")}
               >
-                <Text style={{ fontWeight: "bold" }}>정책 더보기⮕</Text>
+                <Text
+                  style={{ fontFamily: "B", fontSize: 16, color: "#71777C" }}
+                >
+                  더보기 ↓
+                </Text>
               </TouchableOpacity>
             </View>
           </ScrollView>
         </View>
-        {/* <View
-          style={{
-            marginVertical: 15,
-          }}
-        >
-          <View style={{ marginTop: 10, marginBottom: 10 }}>
-            <Image
-              source={require("../../assets/images/ex1.jpeg")}
-              style={{ height: 90, width: "100%" }}
-              resizeMode="cover"
-            />
-          </View>
-        </View> */}
+
         <View style={{ margin: 20 }}>
           <Text
             style={{
               marginBottom: 1,
-              fontFamily: "B",
-              fontSize: 18,
-              color: "#2E4B8F",
+              fontFamily: "SB",
+              fontSize: 16,
+              color: "#4F5150",
             }}
           >
             복잡한 부동산 계약
           </Text>
           <Text
             style={{
-              marginBottom: 5,
               fontFamily: "B",
               fontSize: 18,
-              color: "#2E4B8F",
+              color: "#4F5150",
+              marginBottom: 5,
             }}
           >
-            조금 더 쉽게 준비해요!
+            조금
+            <Text style={{ color: "#2E4B8F" }}> 더 쉽게 준비</Text>
+            해요!
           </Text>
         </View>
 
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           {btnData.map((item) => (
             <TouchableOpacity
               onPress={() => {
@@ -250,10 +257,12 @@ const Main = ({ navigation }) => {
               }}
               style={{
                 backgroundColor: "white",
-                marginHorizontal: item.id === 2 ? 0 : 20,
+                marginHorizontal: "auto",
                 padding: 13,
-                width: "25%",
+                width: "40%",
+                height: 80,
                 borderRadius: 5,
+                overflow: "hidden", // 부모 TouchableOpacity에 추가
                 shadowColor: "rgba(180,180,180,0.4)",
                 shadowOffset: {
                   width: 2,
@@ -265,23 +274,38 @@ const Main = ({ navigation }) => {
               }}
               key={item.id}
             >
-              <View style={{ justifyContent: "center" }}>
+              <View style={{ justifyContent: "center", alignItems: "center" }}>
                 <Text
-                  style={{ fontSize: 15, fontFamily: "SB", color: "#2E4B8F" }}
+                  style={{ fontSize: 18, fontFamily: "B", color: "#2E4B8F" }}
                 >
                   {item.title}
                 </Text>
-                <View style={{ marginTop: 15 }}>
-                  <Image
-                    source={item.imageSource}
-                    style={{ width: 25, height: 25 }}
-                  />
-                </View>
+              </View>
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "relative", // 위치를 조정하기 위해 position 추가
+                  top: -20, // 이미지를 위로 10px 올리기 위해 top 값을 음수로 설정
+                  right: 6,
+                }}
+              >
+                <Image
+                  source={item.imageSource}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    resizeMode: "cover", // 이미지를 넘치는 부분 없이 잘리도록 설정
+                    opacity: 0.3,
+                  }}
+                />
               </View>
             </TouchableOpacity>
           ))}
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 };

@@ -10,28 +10,28 @@ function TutorialViewPg6({ navigation }) {
   const [dbdata, setDbData] = useState([]);
 
   const { user } = useContext(UserContext);
-  useEffect(() => {
-    const user_id = user ? user.id : null;
-    axios
-      .post(`${SERVER_URL}/TVP6/insert`, { user_id })
-      .then((response) => {
-        console.log("데이터 삽입 성공");
-      })
-      .catch((error) => {
-        if (error.response.status === 400) {
-          console.log("이미 존재하는 user_id입니다.");
-        } else {
-          console.error("데이터 삽입 중 오류 발생:", error);
-        }
-      });
-  }, []); // 컴포넌트가 처음 로드될 때만 실행
+  // useEffect(() => {
+  //   const user_id = user ? user.id : null;
+  //   axios
+  //     .post(`${SERVER_URL}/TVP6/insert`, { user_id })
+  //     .then((response) => {
+  //       console.log("데이터 삽입 성공");
+  //     })
+  //     .catch((error) => {
+  //       if (error.response.status === 400) {
+  //         console.log("이미 존재하는 user_id입니다.");
+  //       } else {
+  //         console.error("데이터 삽입 중 오류 발생:", error);
+  //       }
+  //     });
+  // }, []); // 컴포넌트가 처음 로드될 때만 실행
 
   useEffect(() => {
     axios
       .get(`${SERVER_URL}/TVP6/data`)
       .then((response) => {
         const dbdata = response.data;
-        // console.log(dbdata);
+        console.log(dbdata);
         setDbData(dbdata);
       })
       .catch((error) => {
@@ -219,28 +219,47 @@ function TutorialViewPg6({ navigation }) {
               <View
                 style={{ marginTop: 20, marginRight: 10, marginBottom: -20 }}
               >
-                {[...new Set(dbdata.map((data) => data.user_solution))].map(
-                  (solution, index) =>
-                    solution && (
-                      <View
-                        key={index}
-                        style={{
-                          flexDirection: "row",
-                          paddingBottom: 20,
-                          marginRight: 20,
-                          marginTop: 0,
-                          marginLeft: 0,
-                          marginBottom: 0,
-                        }}
-                      >
-                        <Text style={{ fontSize: 15, fontFamily: "R" }}>
-                          {index + 1}.{"  "}
-                        </Text>
-                        <Text style={{ fontSize: 15, fontFamily: "R" }}>
-                          {solution}
-                        </Text>
-                      </View>
-                    )
+                {[...new Set(dbdata.map((data) => data.user_solution))].length >
+                0 ? (
+                  [...new Set(dbdata.map((data) => data.user_solution))].map(
+                    (solution, index) =>
+                      solution && (
+                        <View
+                          key={index}
+                          style={{
+                            flexDirection: "row",
+                            paddingBottom: 20,
+                            marginRight: 20,
+                            marginTop: 0,
+                            marginLeft: 0,
+                            marginBottom: 0,
+                          }}
+                        >
+                          <Text style={{ fontSize: 15, fontFamily: "R" }}>
+                            {index + 1}.{"  "}
+                          </Text>
+                          <Text style={{ fontSize: 15, fontFamily: "R" }}>
+                            {solution}
+                          </Text>
+                        </View>
+                      )
+                  )
+                ) : (
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      margin: 20,
+                      marginTop: 0,
+                    }}
+                  >
+                    <Text
+                      style={{ fontSize: 20, fontFamily: "SB", marginLeft: 20 }}
+                    >
+                      안전히 거래하셔도 됩니다.
+                    </Text>
+                  </View>
                 )}
               </View>
             </View>

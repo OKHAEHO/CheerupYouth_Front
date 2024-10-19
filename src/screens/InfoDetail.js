@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 import DatePicker from "@react-native-community/datetimepicker";
 import * as S from "../../style/InfoDetailStyle";
@@ -134,23 +135,272 @@ const InfoDetail = ({ navigation, route }) => {
           headerText="상세 정보 입력하기"
         />
       </View>
-      <View>
-        <S.MainText>
-          정보를 입력하시면 {"\n"}
-          {user ? user.name : "로그인"}님과 딱 맞는 정책을 알려드려요
-        </S.MainText>
-      </View>
-      <S.Box>
-        <S.TitleText>이름</S.TitleText>
-        <TextInput
-          style={{ fontSize: 15 }}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+
+              padding: 5,
+              marginTop: 15,
+              marginBottom: 0,
+            }}
+          >
+            STEP 1. 내 정보
+          </Text>
+          <Text
+            style={{
+              fontSize: 15,
+
+              color: "#71777C",
+              padding: 5,
+            }}
+          >
+            정보가 정확할수록 알맞는 정책 정보를
+            {"\n"}추천 받을 수 있어요.
+            {/* {user ? user.name : "로그인"} */}
+          </Text>
+        </View>
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: "#EDF1F3",
+            flexDirection: "column",
+            borderRadius: 10,
+            marginTop: 15,
+          }}
+        >
+          <View style={{ flexDirection: "row", padding: 10 }}>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                color: "#8A9095",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              01
+            </Text>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              성함을 알려주세요.
+            </Text>
+          </View>
+          <TextInput
+            style={{
+              fontSize: 15,
+              borderWidth: 1,
+              borderColor: "#EDF1F3",
+              borderRadius: 5,
+              margin: 15,
+              padding: 10,
+              color: "#8A9095",
+            }}
+            onChangeText={setName}
+            value={name}
+            placeholder="이름"
+            returnKeyType="done"
+          />
+        </View>
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: "#EDF1F3",
+            flexDirection: "column",
+            borderRadius: 10,
+            marginTop: 15,
+          }}
+        >
+          <View style={{ flexDirection: "row", padding: 10 }}>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                color: "#8A9095",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              02
+            </Text>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              생년월일은 언제인가요?
+            </Text>
+          </View>
+          {/* <TextInput
+          style={{
+            fontSize: 15,
+            borderWidth: 1,
+            borderColor: "#EDF1F3",
+            borderRadius: 5,
+            margin: 15,
+            padding: 10,
+            color: "#8A9095",
+          }}
           onChangeText={setName}
           value={name}
           placeholder="이름"
           returnKeyType="done"
-        />
-      </S.Box>
-      <S.Box>
+        /> */}
+          <DatePicker
+            style={{
+              fontSize: 15,
+              borderWidth: 1,
+              borderColor: "#EDF1F3",
+              borderRadius: 5,
+              margin: 15,
+              padding: 10,
+              color: "#8A9095",
+            }}
+            value={birthDate}
+            onChange={handleBirthDateChange}
+            mode="date"
+          />
+        </View>
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: "#EDF1F3",
+            flexDirection: "column",
+            borderRadius: 10,
+            marginTop: 15,
+          }}
+        >
+          <View style={{ flexDirection: "row", padding: 10 }}>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                color: "#8A9095",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              03
+            </Text>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              결혼유무
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              margin: 10,
+            }}
+          >
+            {/* 미혼 버튼 */}
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setMarried("미혼")}
+            >
+              <View
+                style={{
+                  height: 20,
+                  width: 20,
+                  borderRadius: 10,
+                  borderWidth: 2,
+                  borderColor: married === "미혼" ? "#2e4b8f" : "gray",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginRight: 10,
+                }}
+              >
+                {married === "미혼" && (
+                  <View
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: "#2e4b8f",
+                    }}
+                  />
+                )}
+              </View>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: married === "미혼" ? "#2e4b8f" : "gray",
+                }}
+              >
+                미혼
+              </Text>
+            </TouchableOpacity>
+
+            {/* 기혼 버튼 */}
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setMarried("기혼")}
+            >
+              <View
+                style={{
+                  height: 20,
+                  width: 20,
+                  borderRadius: 10,
+                  borderWidth: 2,
+                  borderColor: married === "기혼" ? "#2e4b8f" : "gray",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginRight: 10,
+                }}
+              >
+                {married === "기혼" && (
+                  <View
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: "#2e4b8f",
+                    }}
+                  />
+                )}
+              </View>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: married === "기혼" ? "#2e4b8f" : "gray",
+                }}
+              >
+                기혼
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        {/* <S.Box>
         <S.TitleText>결혼유무</S.TitleText>
         <S.Row>
           <Button
@@ -164,8 +414,131 @@ const InfoDetail = ({ navigation, route }) => {
             color={married === "기혼" ? "#2e4b8f" : "gray"}
           />
         </S.Row>
-      </S.Box>
-      <S.Box>
+      </S.Box> */}
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: "#EDF1F3",
+            flexDirection: "column",
+            borderRadius: 10,
+            marginTop: 15,
+          }}
+        >
+          <View style={{ flexDirection: "row", padding: 10 }}>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                color: "#8A9095",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              04
+            </Text>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              성별
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              margin: 10,
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setGender("남성")}
+            >
+              <View
+                style={{
+                  height: 20,
+                  width: 20,
+                  borderRadius: 10,
+                  borderWidth: 2,
+                  borderColor: gender === "남성" ? "#2e4b8f" : "gray",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginRight: 10,
+                }}
+              >
+                {gender === "남성" && (
+                  <View
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: "#2e4b8f",
+                    }}
+                  />
+                )}
+              </View>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: gender === "남성" ? "#2e4b8f" : "gray",
+                }}
+              >
+                남성
+              </Text>
+            </TouchableOpacity>
+
+            {/* 기혼 버튼 */}
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => setGender("여성")}
+            >
+              <View
+                style={{
+                  height: 20,
+                  width: 20,
+                  borderRadius: 10,
+                  borderWidth: 2,
+                  borderColor: gender === "여성" ? "#2e4b8f" : "gray",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginRight: 10,
+                }}
+              >
+                {gender === "여성" && (
+                  <View
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: "#2e4b8f",
+                    }}
+                  />
+                )}
+              </View>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: gender === "여성" ? "#2e4b8f" : "gray",
+                }}
+              >
+                여성
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        {/* <S.Box>
         <S.TitleText>성별</S.TitleText>
         <S.Row>
           <Button
@@ -179,20 +552,56 @@ const InfoDetail = ({ navigation, route }) => {
             color={gender === "여성" ? "#2e4b8f" : "gray"}
           />
         </S.Row>
-      </S.Box>
-      <S.Box>
+      </S.Box> */}
+        {/* <S.Box>
         <S.TitleText>생년월일</S.TitleText>
         <DatePicker
           value={birthDate}
           onChange={handleBirthDateChange}
           mode="date"
         />
-      </S.Box>
-      <S.Box>
-        <S.TitleText>거주지역</S.TitleText>
-
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ marginRight: 10 }}>
+      </S.Box> */}
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: "#EDF1F3",
+            flexDirection: "column",
+            borderRadius: 10,
+            marginTop: 15,
+          }}
+        >
+          <View style={{ flexDirection: "row", padding: 10 }}>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                color: "#8A9095",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              05
+            </Text>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              거주지역
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              margin: 5,
+            }}
+          >
             <View style={styles.Picker}>
               <RNPickerSelect
                 onValueChange={handleCityChange}
@@ -202,38 +611,95 @@ const InfoDetail = ({ navigation, route }) => {
                 textInputProps={{ style: { fontSize: 15 } }} // 글씨 크기 지정
               />
             </View>
-          </View>
 
-          <View style={styles.Picker}>
-            <RNPickerSelect
-              onValueChange={handleDistrictChange}
-              items={
-                selectedCity
-                  ? districts[selectedCity].map((d) => ({
-                      label: d,
-                      value: d,
-                    }))
-                  : []
-              }
-              placeholder={{ label: "구/군", value: null, color: "gray" }}
-              value={selectedDistrict}
-              disabled={!selectedCity}
-              textInputProps={{ style: { fontSize: 15 } }} // 글씨 크기 지정
-            />
+            <View style={styles.Picker}>
+              <RNPickerSelect
+                onValueChange={handleDistrictChange}
+                items={
+                  selectedCity
+                    ? districts[selectedCity].map((d) => ({
+                        label: d,
+                        value: d,
+                      }))
+                    : []
+                }
+                placeholder={{ label: "구/군", value: null, color: "gray" }}
+                value={selectedDistrict}
+                disabled={!selectedCity}
+                textInputProps={{ style: { fontSize: 15 } }} // 글씨 크기 지정
+              />
+            </View>
           </View>
         </View>
-      </S.Box>
-      <S.LastBox>
-        <S.TitleText>월소득</S.TitleText>
-        <S.Row>
-          {/* <TextInput
-            onChangeText={setIncome}
-            value={income}
-            placeholder="0"
-            keyboardType="numeric"
-            returnKeyType="done"
-          />
-          <S.WonText>만원</S.WonText> */}
+        {/* <S.Box>
+          <S.TitleText>거주지역</S.TitleText>
+
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ marginRight: 10 }}>
+              <View style={styles.Picker}>
+                <RNPickerSelect
+                  onValueChange={handleCityChange}
+                  items={cities}
+                  placeholder={{ label: "시/도", value: null, color: "gray" }}
+                  value={selectedCity}
+                  textInputProps={{ style: { fontSize: 15 } }} // 글씨 크기 지정
+                />
+              </View>
+            </View>
+
+            <View style={styles.Picker}>
+              <RNPickerSelect
+                onValueChange={handleDistrictChange}
+                items={
+                  selectedCity
+                    ? districts[selectedCity].map((d) => ({
+                        label: d,
+                        value: d,
+                      }))
+                    : []
+                }
+                placeholder={{ label: "구/군", value: null, color: "gray" }}
+                value={selectedDistrict}
+                disabled={!selectedCity}
+                textInputProps={{ style: { fontSize: 15 } }} // 글씨 크기 지정
+              />
+            </View>
+          </View>
+        </S.Box> */}
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: "#EDF1F3",
+            flexDirection: "column",
+            borderRadius: 10,
+            marginTop: 15,
+          }}
+        >
+          <View style={{ flexDirection: "row", padding: 10 }}>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                color: "#8A9095",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              06
+            </Text>
+            <Text
+              style={{
+                fontSize: 17,
+                fontWeight: "bold",
+                padding: 5,
+                marginTop: 0,
+                marginBottom: 0,
+              }}
+            >
+              월소득
+            </Text>
+          </View>
           <View style={styles.Picker}>
             <RNPickerSelect
               onValueChange={handleIncomeSelect}
@@ -247,43 +713,68 @@ const InfoDetail = ({ navigation, route }) => {
               textInputProps={{ style: { fontSize: 15 } }} // 글씨 크기 지정
             />
           </View>
-        </S.Row>
-      </S.LastBox>
-      <S.Text>
-        입력해주신 정보를 기반으로 맞춤 정책을 추천해 드립니다.{"\n"}다른
-        목적으로 사용되거나 제 3자에게 공개되지 않습니다.
-      </S.Text>
-      <View
-        style={{
-          alignItems: "center",
-          padding: 5,
-          marginBottom: 20,
-        }}
-      >
-        <TouchableOpacity
-          onPress={handleConsentToggle}
-          style={{ flexDirection: "row", alignItems: "center" }}
-        >
-          <Icon
-            name="check-circle"
-            size={20}
-            style={{
-              color: consentGiven ? "#2e4b8f" : "#626262",
-            }}
+        </View>
+        {/* <S.LastBox>
+          <S.TitleText>월소득</S.TitleText>
+          <S.Row>
+            <TextInput
+            onChangeText={setIncome}
+            value={income}
+            placeholder="0"
+            keyboardType="numeric"
+            returnKeyType="done"
           />
-          <Text
-            style={{
-              color: consentGiven ? "#2e4b8f" : "#626262",
-              fontWeight: "bold",
-              marginLeft: 7,
-            }}
+          <S.WonText>만원</S.WonText>
+            <View style={styles.Picker}>
+              <RNPickerSelect
+                onValueChange={handleIncomeSelect}
+                items={incomeOptions}
+                placeholder={{
+                  label: selectedIncome || "소득 구간을 선택하세요",
+                  value: null,
+                  color: "gray",
+                }}
+                value={selectedIncome}
+                textInputProps={{ style: { fontSize: 15 } }} // 글씨 크기 지정
+              />
+            </View>
+          </S.Row>
+        </S.LastBox> */}
+        <S.Text>
+          입력해주신 정보를 기반으로 맞춤 정책을 추천해 드립니다.{"\n"}다른
+          목적으로 사용되거나 제 3자에게 공개되지 않습니다.
+        </S.Text>
+        <View
+          style={{
+            alignItems: "center",
+            padding: 5,
+            marginBottom: 20,
+          }}
+        >
+          <TouchableOpacity
+            onPress={handleConsentToggle}
+            style={{ flexDirection: "row", alignItems: "center" }}
           >
-            [필수] 개인정보 수집 및 이용 동의
-          </Text>
-        </TouchableOpacity>
-      </View>
+            <Icon
+              name="check-circle"
+              size={20}
+              style={{
+                color: consentGiven ? "#2e4b8f" : "#626262",
+              }}
+            />
+            <Text
+              style={{
+                color: consentGiven ? "#2e4b8f" : "#626262",
+                fontWeight: "bold",
+                marginLeft: 7,
+              }}
+            >
+              [필수] 개인정보 수집 및 이용 동의
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-      {/* <View
+        {/* <View
         style={{ alignItems: "center", justifyContent: "center", padding: 15 }}
       >
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -294,11 +785,12 @@ const InfoDetail = ({ navigation, route }) => {
           </Text>
         </TouchableOpacity>
       </View> */}
-      <S.BlueButtonBox>
-        <TouchableOpacity onPress={() => InfoDetailSubmit()}>
-          <S.BlueButtonText>다음</S.BlueButtonText>
-        </TouchableOpacity>
-      </S.BlueButtonBox>
+        <S.BlueButtonBox>
+          <TouchableOpacity onPress={() => InfoDetailSubmit()}>
+            <S.BlueButtonText>다음</S.BlueButtonText>
+          </TouchableOpacity>
+        </S.BlueButtonBox>
+      </ScrollView>
     </S.Container>
   );
 };
@@ -308,6 +800,13 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 5,
     marginBottom: 10,
+    fontSize: 15,
+    borderWidth: 1,
+    borderColor: "#EDF1F3",
+    borderRadius: 5,
+    margin: 15,
+    padding: 10,
+    color: "gray",
   },
 });
 

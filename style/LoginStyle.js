@@ -179,6 +179,7 @@ export const Signup_Finish = styled.TouchableOpacity`
 export const LoginButton = styled.TouchableOpacity`
   background-color: #2d4b8e;
   padding: 10px;
+
   height: 55px;
   width: 100%;
   border-radius: 10px;
@@ -206,7 +207,7 @@ export const LogoContainer = styled.View`
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  margin-top: 40px;
+  margin-top: 150px;
   background-color: white;
 `;
 
@@ -216,14 +217,9 @@ export const InputContainer = styled.View`
 `;
 
 export const StyledImage = styled.Image`
-  width: 150px;
-  height: 160px;
+  width: 230px;
+  height: 240px;
   margin-bottom: 60px;
-`;
-
-export const MainContainer = styled(View)`
-  flex: 1;
-  marginVertical: 90px;
 `;
 
 export const MainLogoContainer = styled.View`

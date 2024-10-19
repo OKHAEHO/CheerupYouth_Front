@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
   View,
@@ -14,32 +14,55 @@ import Tutorial5Tip from "../../../utils/Tutorial5Tip.js";
 import { SERVER_URL } from "../../components/ServerAddress";
 import axios from "axios";
 import HeaderComponent from "../../components/HeaderComponent";
+import { UserContext } from "../../components/UserProvider";
 
 function TutorialViewPg5({ navigation }) {
-  // const [dbdata, setDbData] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     .get(`${SERVER_URL}/ch4`)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       const dbdata = response.data;
-  //       setDbData(dbdata);
-  //     })
-  //     .catch((error) => {
-  //       console.error("데이터를 가져오는 중 오류가 발생했습니다:", error);
-  //     });
-  // }, []); // DB 불러오기
+  const [dbdata, setDbData] = useState([]);
+  const { user } = useContext(UserContext);
 
-  // const tvp6DataInsert = () => {
+  useEffect(() => {
+    if (user && user.id) {
+      const user_id = user.id;
+
+      // 해당 user_id 데이터 삭제
+      axios
+        .delete(`${SERVER_URL}/TVP6/delete/${user_id}`)
+        .then(() => {
+          // 데이터 삭제 성공 후 삽입 요청
+          return axios.post(`${SERVER_URL}/TVP6/insert`, { user_id });
+        })
+        .then((response) => {
+          console.log("데이터 삽입 성공");
+        })
+        .catch((error) => {
+          if (error.response) {
+            if (error.response.status === 400) {
+              console.log("이미 존재하는 user_id입니다.");
+            } else {
+              console.error("데이터 삽입 중 오류 발생:", error);
+            }
+          } else {
+            console.error("네트워크 오류:", error);
+          }
+        });
+    }
+  }, []); // 컴포넌트가 처음 로드될 때만 실행
+
+  // useEffect(() => {
+  //   const user_id = user ? user.id : null;
   //   axios
-  //     .post(`${SERVER_URL}/TVP6/insert`, user_id)
+  //     .post(`${SERVER_URL}/TVP6/insert`, { user_id })
   //     .then((response) => {
-  //       navigation.navigate("TVP5");
+  //       console.log("데이터 삽입 성공");
   //     })
   //     .catch((error) => {
-  //       console.error("잘못됐어요 ? : ", error);
+  //       if (error.response.status === 400) {
+  //         console.log("이미 존재하는 user_id입니다.");
+  //       } else {
+  //         console.error("데이터 삽입 중 오류 발생:", error);
+  //       }
   //     });
-  // };
+  // }, []); // 컴포넌트가 처음 로드될 때만 실행
 
   const [styleChange, setStyleChange] = useState("");
   const [textItem, setTextItem] = useState("");

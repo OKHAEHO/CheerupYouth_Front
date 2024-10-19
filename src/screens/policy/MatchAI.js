@@ -155,7 +155,7 @@ const MatchAI = ({ policyKey, setIsSupportedOpen }) => {
               "마지막 결과로 가능 / 불가능을 알려줘 최종 가능하면 check 이모티콘, 불일치하면 X 이모티콘",
           },
         ],
-        temperature: 0.7,
+        temperature: 0.9,
         top_p: 1.0,
       };
 
@@ -223,8 +223,8 @@ const MatchAI = ({ policyKey, setIsSupportedOpen }) => {
         )}
         {/* <Button title="매칭하기" onPress={fetchMemberInfo} /> */}
         {/* {error && <Text style={{color: 'red'}}>{error}</Text>} */}
-        <Text style={{ fontSize: 12, color: "red", textAlign: "right" }}>
-          제공된 정보는 참고 자료로만 사용하시고, 전적으로 신뢰하지 마시기
+        <Text style={{ fontSize: 12, color: "red", textAlign: "center" }}>
+          제공된 정보는 참고 자료로만 사용하시고, {"\n"}전적으로 신뢰하지 마시기
           바랍니다.
         </Text>
       </View>

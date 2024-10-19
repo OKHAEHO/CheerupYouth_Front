@@ -4,7 +4,14 @@ import Logo from "../components/Logo";
 import Id from "../components/Id";
 import Id_Pw_Sign from "../components/Id_Pw_Sign";
 import Division from "../components/Division";
-import { SafeAreaView, View, Alert} from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import * as S from "../../style/LoginStyle";
 import axios from "axios";
 import { SERVER_URL } from "../components/ServerAddress";
@@ -53,38 +60,46 @@ const LoginScreen = ({ navigation }) => {
       // navigation.navigate("BottomBar");
     } catch (error) {
       console.error("데이터를 보내는 중 오류가 발생했습니다:", error);
-      Alert.alert(
-        "로그인 실패",
-        "아이디나 비밀번호를 다시 확인해 주세요.",
-        [{ text: "확인" }]
-      );
+      Alert.alert("로그인 실패", "아이디나 비밀번호를 다시 확인해 주세요.", [
+        { text: "확인" },
+      ]);
     }
   };
-  
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff", alignContent: "center", alignItems:"center" }}>
-      <S.MainContainer>
-        <S.LogoContainer>
-          <Logo />
-        </S.LogoContainer>
-        <S.InputContainer>
-          <Id
-            onPress={() => {
-              submitBtn();
-            }}
-            userId={userId}
-            setUserid={setUserid}
-            password={password}
-            setPassword={setPassword}
-          />
-          <Id_Pw_Sign
-            text="아이디찾기"
-            SignUp={() => handlsignup()} // onSignUp으로 변경
-          />
-        </S.InputContainer>
-        <Division />
-      </S.MainContainer>
-    </SafeAreaView>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+      }}
+    >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <ScrollView>
+          <S.LogoContainer>
+            <Logo />
+          </S.LogoContainer>
+          <S.InputContainer>
+            <Id
+              onPress={() => {
+                submitBtn();
+              }}
+              userId={userId}
+              setUserid={setUserid}
+              password={password}
+              setPassword={setPassword}
+            />
+            <Id_Pw_Sign
+              text="아이디찾기"
+              SignUp={() => handlsignup()} // onSignUp으로 변경
+            />
+          </S.InputContainer>
+          <Division />
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </View>
   );
 };
 
