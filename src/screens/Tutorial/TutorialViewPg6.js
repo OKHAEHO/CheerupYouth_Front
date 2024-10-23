@@ -10,21 +10,6 @@ function TutorialViewPg6({ navigation }) {
   const [dbdata, setDbData] = useState([]);
 
   const { user } = useContext(UserContext);
-  // useEffect(() => {
-  //   const user_id = user ? user.id : null;
-  //   axios
-  //     .post(`${SERVER_URL}/TVP6/insert`, { user_id })
-  //     .then((response) => {
-  //       console.log("데이터 삽입 성공");
-  //     })
-  //     .catch((error) => {
-  //       if (error.response.status === 400) {
-  //         console.log("이미 존재하는 user_id입니다.");
-  //       } else {
-  //         console.error("데이터 삽입 중 오류 발생:", error);
-  //       }
-  //     });
-  // }, []); // 컴포넌트가 처음 로드될 때만 실행
 
   useEffect(() => {
     axios

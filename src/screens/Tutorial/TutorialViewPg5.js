@@ -21,47 +21,46 @@ function TutorialViewPg5({ navigation }) {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    if (user && user.id) {
-      const user_id = user.id;
-
-      // 해당 user_id 데이터 삭제
-      axios
-        .delete(`${SERVER_URL}/TVP6/delete/${user_id}`)
-        .then(() => {
-          // 데이터 삭제 성공 후 삽입 요청
-          return axios.post(`${SERVER_URL}/TVP6/insert`, { user_id });
-        })
-        .then((response) => {
-          console.log("데이터 삽입 성공");
-        })
-        .catch((error) => {
-          if (error.response) {
-            if (error.response.status === 400) {
-              console.log("이미 존재하는 user_id입니다.");
-            } else {
-              console.error("데이터 삽입 중 오류 발생:", error);
-            }
-          } else {
-            console.error("네트워크 오류:", error);
-          }
-        });
-    }
+    const user_id = user ? user.id : null;
+    axios
+      .post(`${SERVER_URL}/TVP6/insert`, { user_id })
+      .then((response) => {
+        console.log("데이터 삽입 성공");
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          console.log("이미 존재하는 user_id입니다.");
+        } else {
+          console.error("데이터 삽입 중 오류 발생:", error);
+        }
+      });
   }, []); // 컴포넌트가 처음 로드될 때만 실행
-
   // useEffect(() => {
-  //   const user_id = user ? user.id : null;
-  //   axios
-  //     .post(`${SERVER_URL}/TVP6/insert`, { user_id })
-  //     .then((response) => {
-  //       console.log("데이터 삽입 성공");
-  //     })
-  //     .catch((error) => {
-  //       if (error.response.status === 400) {
-  //         console.log("이미 존재하는 user_id입니다.");
-  //       } else {
-  //         console.error("데이터 삽입 중 오류 발생:", error);
-  //       }
-  //     });
+  //   if (user && user.id) {
+  //     const user_id = user.id;
+
+  //     // 해당 user_id 데이터 삭제
+  //     axios
+  //       .delete(`${SERVER_URL}/TVP6/delete/${user_id}`)
+  //       .then(() => {
+  //         // 데이터 삭제 성공 후 삽입 요청
+  //         return axios.post(`${SERVER_URL}/TVP6/insert`, { user_id });
+  //       })
+  //       .then((response) => {
+  //         console.log("데이터 삽입 성공");
+  //       })
+  //       .catch((error) => {
+  //         if (error.response) {
+  //           if (error.response.status === 400) {
+  //             console.log("이미 존재하는 user_id입니다.");
+  //           } else {
+  //             console.error("데이터 삽입 중 오류 발생:", error);
+  //           }
+  //         } else {
+  //           console.error("네트워크 오류:", error);
+  //         }
+  //       });
+  //   }
   // }, []); // 컴포넌트가 처음 로드될 때만 실행
 
   const [styleChange, setStyleChange] = useState("");
